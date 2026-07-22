@@ -1,0 +1,14 @@
+auth:
+    login:
+        pass: 'Niepoprawne dane logowania.'
+        notVerified: 'Potwierdź adres email.'
+        notActive: 'Konto oczekuje na aktywację administratora.'
+        wrongPath: 'Request na nieprawidłowy endpoint app_login'
+    registry:
+        errors: 'Wystąpiły błędy podczas rejestracji. Skontaktuj się z administracją.'
+        emailDuplicate: 'Użytkownik o podanym emailu już istnieje.'
+    logout:
+        wrongPath: 'Request na nieprawidłowy endpoint api_logout'
+
+form:
+    required: 'Pole {required} jest wymagane!'

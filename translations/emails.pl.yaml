@@ -1,0 +1,7 @@
+emails:
+    afterActivate:
+        subject: 'Witaj w Typer 2026'
+    afterDeactivate:
+        subject: 'Twoje konto zostało dezaktywowane'
+    register:
+        subject: 'Proszę potwierdzić adres email'

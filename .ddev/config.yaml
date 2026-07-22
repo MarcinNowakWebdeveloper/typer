@@ -1,6 +1,6 @@
 name: typer
 type: symfony
-docroot: "typer/public"
+docroot: "public"
 php_version: "8.5"
 webserver_type: nginx-fpm
 xdebug_enabled: false

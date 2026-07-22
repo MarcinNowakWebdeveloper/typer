@@ -1,0 +1,89 @@
+<script setup>
+import { useAuthStore } from '@/stores/auth'
+import { useRouter } from 'vue-router'
+import UserAvatar from '@/components/users/UserAvatar.vue'
+import { useI18n } from 'vue-i18n'
+
+const auth = useAuthStore()
+const router = useRouter()
+const { t } = useI18n()
+
+const logout = async () => {
+    await auth.logout()
+    router.push({ name: 'login' })
+}
+
+const login = async () => {
+    router.push({ name: 'login' })
+}
+
+const registry = async () => {
+    router.push({ name: 'register' })
+}
+</script>
+
+<template>
+    <nav class="navbar navbar-expand-lg bg-white border-bottom shadow-sm">
+        <div class="container">
+            <div class="logo d-flex align-items-center">
+                <i class="bi bi-trophy fw-bold me-2 color-primary" />
+                <router-link class="navbar-brand fw-bold text-md-start" :to="{ name: 'dashboard' }" active-class="">
+                    {{ t('common.title') }}
+                </router-link>
+            </div>
+
+            <div v-if="auth.isLogged" class="navbar-nav ms-4">
+                <router-link
+                    v-if="auth.isAdmin"
+                    class="nav-link d-flex align-items-center px-2"
+                    :to="{ name: 'users' }"
+                >
+                    <i class="bi bi-person-fill me-2" />{{ t('components.navigation.users') }}
+                </router-link>
+            </div>
+
+            <div v-if="auth.isLogged" class="ms-auto d-flex align-items-center gap-3">
+                <UserAvatar :name="auth.user?.name" :color="auth.user?.color" />
+
+                <button class="btn btn-outline-secondary" @click="logout">
+                    <i class="bi bi-box-arrow-right pe-1" />{{ t('components.navigation.logout') }}
+                </button>
+            </div>
+            <div v-else class="ms-auto d-flex align-items-center gap-3">
+                <button class="btn btn-outline-secondary" @click="login">
+                    <i class="bi bi-box-arrow-left pe-1" />{{ t('components.navigation.login') }}
+                </button>
+                <button class="btn btn-outline-secondary" @click="registry">
+                    <i class="bi bi-person-add pe-1" />{{ t('components.navigation.registry') }}
+                </button>
+            </div>
+        </div>
+    </nav>
+</template>
+
+<style lang="scss">
+nav.navbar {
+    a {
+        text-decoration: none;
+    }
+
+    .logo {
+        i {
+            font-size: 2rem;
+        }
+    }
+
+    .nav-link:hover {
+        background: rgba(91, 76, 255, 0.12);
+        color: var(--primary);
+        border-radius: 10px;
+    }
+
+    .router-link-active {
+        background: rgba(91, 76, 255, 0.12);
+        color: var(--primary);
+        border-radius: 10px;
+        font-weight: 600;
+    }
+}
+</style>
