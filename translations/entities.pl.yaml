@@ -1,3 +1,7 @@
+team:
+    image: 'Logo zespołu'
+    name: 'Nazwa zespołu'
+
 user:
     email: 'Email'
     password: 'Hasło'

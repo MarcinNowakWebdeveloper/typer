@@ -11,4 +11,12 @@ auth:
         wrongPath: 'Request na nieprawidłowy endpoint api_logout'
 
 form:
-    required: 'Pole {required} jest wymagane!'
+    required:
+        field: 'Pole {required} jest wymagane!'
+        fields: 'Pola {required} są wymagane!'
+
+api:
+    wrongData: 'Nieprawidłowy format danych'
+    file:
+        notFound: 'Nie znaleziono pliku'
+        notFoundOnDisk: 'Nie znaleziono pliku na dysku'

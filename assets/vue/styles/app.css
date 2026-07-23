@@ -10,15 +10,16 @@
     --background: #f4f7ff;
     --background-rgb: 244, 247, 255;
     --surface: #ffffff;
-    --text-primary: #0f172a;
-    --text-secondary: #64748b;
+
+    --default: #000000;
+
+    --text-primary: #5b4cff;
 
     --radius: 16px;
 }
 
 body {
     background: var(--background);
-    color: var(--text-primary);
 }
 
 .color-primary {
