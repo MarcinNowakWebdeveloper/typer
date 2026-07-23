@@ -10,18 +10,27 @@ use Symfony\Component\Validator\Constraints as Assert;
 #[ORM\Entity(repositoryClass: TeamRepository::class)]
 class Team
 {
-    #[Groups(['team:list'])]
+    #[Groups([
+        'admin:group:list',
+        'team:list',
+    ])]
     #[ORM\Id]
     #[ORM\GeneratedValue]
     #[ORM\Column]
     private ?int $id = null;
 
-    #[Groups(['team:list'])]
+    #[Groups([
+        'admin:group:list',
+        'team:list',
+    ])]
     #[Assert\NotBlank]
     #[ORM\Column(length: 255)]
     private ?string $name = null;
 
-    #[Groups(['team:list'])]
+    #[Groups([
+        'admin:group:list',
+        'team:list',
+    ])]
     #[ORM\OneToOne(cascade: ['persist', 'remove'])]
     private ?File $logo = null;
 

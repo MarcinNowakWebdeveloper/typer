@@ -51,6 +51,11 @@ const routes = [
                         name: 'config_teams',
                         component: () => import('@/modules/admin/config/TeamsPage.vue'),
                     },
+                    {
+                        path: 'groups',
+                        name: 'config_groups',
+                        component: () => import('@/modules/admin/config/GroupsPage.vue'),
+                    },
                 ],
             },
             {
