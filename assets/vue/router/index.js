@@ -10,6 +10,7 @@ import WaitingForActivationPage from '@/modules/auth/WaitingForActivationPage.vu
 import VerifyFailedPage from '@/modules/auth/VerifyFailedPage.vue'
 
 import UsersPage from '@/modules/admin/users/UsersPage.vue'
+import ConfigPage from '@/modules/admin/config/ConfigPage.vue'
 
 const routes = [
     {
@@ -31,6 +32,26 @@ const routes = [
                 meta: {
                     requiresAdmin: true,
                 },
+            },
+            {
+                path: 'config',
+                name: 'config',
+                component: ConfigPage,
+                meta: {
+                    requiresAdmin: true,
+                },
+                children: [
+                    {
+                        path: '',
+                        name: 'config_home',
+                        redirect: { name: 'config_teams' },
+                    },
+                    {
+                        path: 'teams',
+                        name: 'config_teams',
+                        component: () => import('@/modules/admin/config/TeamsPage.vue'),
+                    },
+                ],
             },
             {
                 path: '/login',

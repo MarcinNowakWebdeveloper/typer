@@ -40,6 +40,14 @@ const registry = async () => {
                 >
                     <i class="bi bi-person-fill me-2" />{{ t('components.navigation.users') }}
                 </router-link>
+
+                <router-link
+                    v-if="auth.isAdmin"
+                    class="nav-link d-flex align-items-center px-2"
+                    :to="{ name: 'config_home' }"
+                >
+                    <i class="bi bi-gear me-2" />{{ t('components.navigation.configuration') }}
+                </router-link>
             </div>
 
             <div v-if="auth.isLogged" class="ms-auto d-flex align-items-center gap-3">
