@@ -12,7 +12,10 @@ class File
 {
     use TimestampableEntity;
 
-    #[Groups(['team:list'])]
+    #[Groups([
+        'admin:group:list',
+        'team:list',
+    ])]
     #[ORM\Id]
     #[ORM\GeneratedValue]
     #[ORM\Column]

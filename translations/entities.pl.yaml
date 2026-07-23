@@ -1,3 +1,6 @@
+group:
+    name: 'Nazwa grupa'
+    teamIds: 'Zespoły'
 team:
     image: 'Logo zespołu'
     name: 'Nazwa zespołu'

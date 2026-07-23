@@ -12,6 +12,9 @@ const { t } = useI18n()
                 <router-link :to="{ name: 'config_teams' }" class="nav-link" active-class="active">
                     {{ t('admin.config.configPage.teams') }}
                 </router-link>
+                <router-link :to="{ name: 'config_groups' }" class="nav-link" active-class="active">
+                    {{ t('admin.config.configPage.groups') }}
+                </router-link>
             </nav>
         </div>
         <div>
