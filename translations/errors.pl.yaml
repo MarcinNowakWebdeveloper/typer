@@ -1,3 +1,6 @@
+admin:
+    stage:
+        noGroupIds: 'Nieprawidłowa lista grup.'
 auth:
     login:
         pass: 'Niepoprawne dane logowania.'

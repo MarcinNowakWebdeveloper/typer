@@ -12,6 +12,7 @@ class Team
 {
     #[Groups([
         'admin:group:list',
+        'admin:stage:list',
         'team:list',
     ])]
     #[ORM\Id]

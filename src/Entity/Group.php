@@ -15,20 +15,29 @@ class Group
 {
     use TimestampableEntity;
 
-    #[Groups(['admin:group:list'])]
+    #[Groups([
+        'admin:group:list',
+        'admin:stage:list',
+    ])]
     #[ORM\Id]
     #[ORM\GeneratedValue]
     #[ORM\Column]
     private ?int $id = null;
 
-    #[Groups(['admin:group:list'])]
+    #[Groups([
+        'admin:group:list',
+        'admin:stage:list',
+    ])]
     #[ORM\Column(length: 255)]
     private ?string $name = null;
 
     /**
      * @var Collection<int, Team>
      */
-    #[Groups(['admin:group:list'])]
+    #[Groups([
+        'admin:group:list',
+        'admin:stage:list',
+    ])]
     #[ORM\ManyToMany(targetEntity: Team::class)]
     #[ORM\JoinTable(name: 'team_group_team')]
     #[ORM\OrderBy(['name' => 'ASC'])]
