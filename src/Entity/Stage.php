@@ -15,13 +15,19 @@ class Stage
 {
     use TimestampableEntity;
 
-    #[Groups(['admin:stage:list'])]
+    #[Groups([
+        'admin:stage:list',
+        'admin:stage:group:view',
+    ])]
     #[ORM\Id]
     #[ORM\GeneratedValue]
     #[ORM\Column]
     private ?int $id = null;
 
-    #[Groups(['admin:stage:list'])]
+    #[Groups([
+        'admin:stage:list',
+        'admin:stage:group:view',
+    ])]
     #[ORM\Column(length: 255)]
     private ?string $name = null;
 

@@ -11,8 +11,10 @@ use Symfony\Component\Validator\Constraints as Assert;
 class Team
 {
     #[Groups([
+        'admin:game:list',
         'admin:group:list',
         'admin:stage:list',
+        'admin:stage:group:view',
         'team:list',
     ])]
     #[ORM\Id]
@@ -21,7 +23,9 @@ class Team
     private ?int $id = null;
 
     #[Groups([
+        'admin:game:list',
         'admin:group:list',
+        'admin:stage:group:view',
         'team:list',
     ])]
     #[Assert\NotBlank]
@@ -29,7 +33,9 @@ class Team
     private ?string $name = null;
 
     #[Groups([
+        'admin:game:list',
         'admin:group:list',
+        'admin:stage:group:view',
         'team:list',
     ])]
     #[ORM\OneToOne(cascade: ['persist', 'remove'])]

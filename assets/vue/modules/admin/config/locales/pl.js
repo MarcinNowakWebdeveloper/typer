@@ -5,6 +5,25 @@ export default {
         title: 'Konfiguracja',
         stages: 'Etapy',
     },
+    game: {
+        form: {
+            title: {
+                new: 'Dodaj mecz w grupie "{groupName}" etapu "{stageName}"',
+                edit: 'Edytuj mecz w grupie "{groupName}" etapu "{stageName}"',
+            },
+            fields: {
+                awayGoals: 'Bramki przyjezdnych',
+                awayTeam: 'Drużyna przyjezdna',
+                date: 'Data',
+                homeGoals: 'Bramki gospodarzy',
+                homeTeam: 'Drużyna gospodarzy',
+                time: 'Godzina',
+            },
+            placeholder: {
+                searchTeam: 'Wyszukaj drużynę',
+            },
+        },
+    },
     groupPage: {
         form: {
             title: {

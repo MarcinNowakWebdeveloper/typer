@@ -45,13 +45,21 @@ onMounted(loadStages)
                         <span class="fw-bold">{{ stage.name }}</span>
                         <div class="mt-2 d-flex gap-2 flex-wrap">
                             <template v-for="stageGroup in stage.groups" :key="stageGroup.id">
-                                <div class="btn btn-light col-auto me-3">
-                                    <div>{{ stageGroup.group.name }}</div>
-                                    <div class="group-teams-count">
-                                        {{ stageGroup.group.teams.length }}
-                                        {{ t('admin.config.stagePage.stageGroup.teams') }}
+                                <router-link
+                                    :to="{
+                                        name: 'config_stages_games',
+                                        params: { id: stageGroup.id },
+                                    }"
+                                    class="nav-link"
+                                >
+                                    <div class="btn btn-light col-auto me-3">
+                                        <div>{{ stageGroup.group.name }}</div>
+                                        <div class="group-teams-count">
+                                            {{ stageGroup.group.teams.length }}
+                                            {{ t('admin.config.stagePage.stageGroup.teams') }}
+                                        </div>
                                     </div>
-                                </div>
+                                </router-link>
                             </template>
                         </div>
                     </div>

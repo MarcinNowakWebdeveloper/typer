@@ -13,7 +13,9 @@ class File
     use TimestampableEntity;
 
     #[Groups([
+        'admin:game:list',
         'admin:group:list',
+        'admin:stage:group:view',
         'team:list',
     ])]
     #[ORM\Id]

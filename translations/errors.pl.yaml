@@ -17,6 +17,7 @@ form:
     required:
         field: 'Pole {required} jest wymagane!'
         fields: 'Pola {required} są wymagane!'
+    notFound: 'Nie znaleziono obiektu {object}'
 
 api:
     wrongData: 'Nieprawidłowy format danych'
