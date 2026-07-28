@@ -3,6 +3,7 @@ export default {
         groups: 'Grupy',
         teams: 'Zespoły',
         title: 'Konfiguracja',
+        stages: 'Etapy',
     },
     groupPage: {
         form: {
@@ -26,6 +27,22 @@ export default {
             placeholder: {
                 name: 'Nazwa drużyny',
             },
+        },
+    },
+    stagePage: {
+        form: {
+            title: {
+                edit: 'Edytuj etap',
+                new: 'Dodaj etap',
+            },
+            placeholder: {
+                groupSearch: 'Wyszukaj grupę',
+                teamSearch: 'Nazwa etapu',
+                shortName: 'Skrócona nazwa etapu',
+            },
+        },
+        stageGroup: {
+            teams: 'Zespoły',
         },
     },
 }

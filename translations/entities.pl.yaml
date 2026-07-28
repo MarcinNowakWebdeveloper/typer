@@ -4,7 +4,10 @@ group:
 team:
     image: 'Logo zespołu'
     name: 'Nazwa zespołu'
-
+stage:
+    groupIds: 'Grupy'
+    name: 'Nazwa etapu'
+    shortName: 'Skrócona nazwa etapu'
 user:
     email: 'Email'
     password: 'Hasło'

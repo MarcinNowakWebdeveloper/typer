@@ -15,4 +15,17 @@ class GroupRepository extends ServiceEntityRepository
     {
         parent::__construct($registry, Group::class);
     }
+
+    /**
+     * @param array<int, int> $array
+     *
+     * @return array<int, Group>
+     */
+    public function findAndIndexById(array $array): array
+    {
+        $qb = $this->createQueryBuilder('g', 'g.id');
+        $qb->where($qb->expr()->in('g.id', $array));
+
+        return $qb->getQuery()->getResult();
+    }
 }
