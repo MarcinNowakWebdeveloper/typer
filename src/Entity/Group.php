@@ -18,6 +18,7 @@ class Group
     #[Groups([
         'admin:group:list',
         'admin:stage:list',
+        'admin:stage:group:view',
     ])]
     #[ORM\Id]
     #[ORM\GeneratedValue]
@@ -27,6 +28,7 @@ class Group
     #[Groups([
         'admin:group:list',
         'admin:stage:list',
+        'admin:stage:group:view',
     ])]
     #[ORM\Column(length: 255)]
     private ?string $name = null;
@@ -37,6 +39,7 @@ class Group
     #[Groups([
         'admin:group:list',
         'admin:stage:list',
+        'admin:stage:group:view',
     ])]
     #[ORM\ManyToMany(targetEntity: Team::class)]
     #[ORM\JoinTable(name: 'team_group_team')]

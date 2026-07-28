@@ -1,3 +1,9 @@
+game:
+    date: 'Data gry'
+    time: 'Godzina gry'
+    stageGroupId: 'Grupa'
+    homeTeamId: 'Drużyna lokalna'
+    awayTeamId: 'Drużyna przyjezdna'
 group:
     name: 'Nazwa grupa'
     teamIds: 'Zespoły'

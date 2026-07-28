@@ -61,6 +61,11 @@ const routes = [
                         name: 'config_stages',
                         component: () => import('@/modules/admin/config/StagesPage.vue'),
                     },
+                    {
+                        path: 'stages/:id/games',
+                        name: 'config_stages_games',
+                        component: () => import('@/modules/admin/config/StagesPage/GamesPage.vue'),
+                    },
                 ],
             },
             {
