@@ -66,6 +66,11 @@ const routes = [
                         name: 'config_stages_games',
                         component: () => import('@/modules/admin/config/StagesPage/GamesPage.vue'),
                     },
+                    {
+                        path: 'joker',
+                        name: 'config_joker',
+                        component: () => import('@/modules/admin/config/JokerPage.vue'),
+                    },
                 ],
             },
             {

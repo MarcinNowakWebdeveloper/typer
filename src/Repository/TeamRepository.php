@@ -15,4 +15,14 @@ class TeamRepository extends ServiceEntityRepository
     {
         parent::__construct($registry, Team::class);
     }
+
+    public function resetJoker(): void
+    {
+        $this->createQueryBuilder('t')
+            ->update()
+            ->set('t.isJoker', ':isJoker')
+            ->setParameter('isJoker', false)
+            ->getQuery()
+            ->execute();
+    }
 }

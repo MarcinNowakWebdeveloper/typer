@@ -7,6 +7,8 @@ game:
 group:
     name: 'Nazwa grupa'
     teamIds: 'Zespoły'
+joker:
+    teamId: 'Drużyna'
 team:
     image: 'Logo zespołu'
     name: 'Nazwa zespołu'
