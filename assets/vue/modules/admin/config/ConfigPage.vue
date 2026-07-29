@@ -18,6 +18,9 @@ const { t } = useI18n()
                 <router-link :to="{ name: 'config_stages' }" class="nav-link" active-class="active">
                     {{ t('admin.config.configPage.stages') }}
                 </router-link>
+                <router-link :to="{ name: 'config_joker' }" class="nav-link" active-class="active">
+                    {{ t('admin.config.configPage.joker') }}
+                </router-link>
             </nav>
         </div>
         <div>

@@ -41,6 +41,10 @@ class Team
     #[ORM\OneToOne(cascade: ['persist', 'remove'])]
     private ?File $logo = null;
 
+    #[Groups(['team:list'])]
+    #[ORM\Column(type: 'boolean', options: ['default' => false])]
+    private bool $isJoker = false;
+
     public function getId(): int
     {
         return $this->id;
@@ -75,5 +79,15 @@ class Team
         $this->logo = $logo;
 
         return $this;
+    }
+
+    public function isJoker(): bool
+    {
+        return $this->isJoker;
+    }
+
+    public function setIsJoker(bool $isJoker): void
+    {
+        $this->isJoker = $isJoker;
     }
 }

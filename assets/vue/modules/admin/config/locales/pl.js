@@ -1,6 +1,7 @@
 export default {
     configPage: {
         groups: 'Grupy',
+        joker: 'Joker',
         teams: 'Zespoły',
         title: 'Konfiguracja',
         stages: 'Etapy',
