@@ -5,6 +5,7 @@ import adminUsersPl from '@/modules/admin/users/locales/pl.js'
 import adminConfigPl from '@/modules/admin/config/locales/pl.js'
 import componentsNavigationPl from '@/components/navigation/locales/pl.js'
 import authPl from '@/modules/auth/locales/pl.js'
+import userJokerPl from '@/modules/user/joker/locales/pl.js'
 
 const i18n = createI18n({
     legacy: false,
@@ -20,6 +21,9 @@ const i18n = createI18n({
             common: commonPl,
             components: {
                 navigation: componentsNavigationPl,
+            },
+            user: {
+                joker: userJokerPl,
             },
         },
     },

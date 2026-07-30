@@ -1,3 +1,7 @@
 user:
     email:
         unique: 'Istnieje już konto z tym adresem e-mail.'
+
+game:
+    userGames:
+        with_points: 'Nie można usunąć meczu, bo przyznano już punktu.'

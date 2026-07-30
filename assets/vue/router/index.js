@@ -3,6 +3,7 @@ import { createRouter, createWebHistory } from 'vue-router'
 import { useAuthStore } from '@/stores/auth'
 import AppLayout from '@/layouts/AppLayout.vue'
 import DashboardPage from '@/modules/dashboard/DashboardPage.vue'
+import JokerPage from '@/modules/user/joker/JokerPage.vue'
 
 import LoginPage from '@/modules/auth/LoginPage.vue'
 import RegisterPage from '@/modules/auth/RegisterPage.vue'
@@ -21,6 +22,14 @@ const routes = [
                 path: '',
                 name: 'dashboard',
                 component: DashboardPage,
+                meta: {
+                    requiresAuth: true,
+                },
+            },
+            {
+                path: '/user/joker',
+                name: 'joker',
+                component: JokerPage,
                 meta: {
                     requiresAuth: true,
                 },

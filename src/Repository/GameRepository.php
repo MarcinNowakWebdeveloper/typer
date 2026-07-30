@@ -15,4 +15,14 @@ class GameRepository extends ServiceEntityRepository
     {
         parent::__construct($registry, Game::class);
     }
+
+    public function getFirstGame(): ?Game
+    {
+        return $this->createQueryBuilder('g')
+            ->orderBy('g.date', 'ASC')
+            ->setMaxResults(1)
+            ->getQuery()
+            ->getOneOrNullResult()
+        ;
+    }
 }
