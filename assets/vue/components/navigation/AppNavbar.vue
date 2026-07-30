@@ -3,6 +3,7 @@ import { useAuthStore } from '@/stores/auth'
 import { useRouter } from 'vue-router'
 import UserAvatar from '@/components/users/UserAvatar.vue'
 import { useI18n } from 'vue-i18n'
+import JokerIcon from '@/../icons/card-joker-svgrepo-com.svg'
 
 const auth = useAuthStore()
 const router = useRouter()
@@ -33,6 +34,10 @@ const registry = async () => {
             </div>
 
             <div v-if="auth.isLogged" class="navbar-nav ms-4">
+                <router-link class="nav-link d-flex align-items-center px-2" :to="{ name: 'joker' }">
+                    <JokerIcon class="joker-icon me-2" />{{ t('components.navigation.joker') }}
+                </router-link>
+
                 <router-link
                     v-if="auth.isAdmin"
                     class="nav-link d-flex align-items-center px-2"
@@ -85,6 +90,10 @@ nav.navbar {
         background: rgba(91, 76, 255, 0.12);
         color: var(--primary);
         border-radius: 10px;
+    }
+
+    .joker-icon {
+        height: 30px;
     }
 
     .router-link-active {

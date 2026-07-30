@@ -2,6 +2,7 @@
 
 namespace App\Entity;
 
+use App\Entity\User\Joker;
 use App\Repository\UserRepository;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
@@ -56,6 +57,9 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     #[Groups(['user:list'])]
     #[ORM\Column(length: 18, nullable: true)]
     private ?string $color = null;
+
+    #[ORM\OneToOne(targetEntity: Joker::class, mappedBy: 'user')]
+    private ?Joker $joker = null;
 
     public function getId(): ?int
     {
@@ -197,6 +201,16 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     public function setColor(?string $color): void
     {
         $this->color = $color;
+    }
+
+    public function getJoker(): ?Joker
+    {
+        return $this->joker;
+    }
+
+    public function setJoker(?Joker $joker): void
+    {
+        $this->joker = $joker;
     }
 
     public function isAdmin(): bool

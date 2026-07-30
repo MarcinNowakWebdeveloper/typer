@@ -24,3 +24,7 @@ api:
     file:
         notFound: 'Nie znaleziono pliku'
         notFoundOnDisk: 'Nie znaleziono pliku na dysku'
+
+access:
+    joker:
+        notEditable: 'Typowanie jokera zostało zakończone.'
