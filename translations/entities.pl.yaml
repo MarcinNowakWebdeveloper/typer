@@ -13,9 +13,13 @@ team:
     image: 'Logo zespołu'
     name: 'Nazwa zespołu'
 stage:
+    gamesIds: 'Mecze'
     groupIds: 'Grupy'
     name: 'Nazwa etapu'
     shortName: 'Skrócona nazwa etapu'
 user:
     email: 'Email'
     password: 'Hasło'
+userGame:
+    awayGoals: 'Bramki przyjezdnych'
+    homeGoals: 'Bramki lokalnych'

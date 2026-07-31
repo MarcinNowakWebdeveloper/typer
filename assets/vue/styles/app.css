@@ -34,3 +34,7 @@ body {
     border-radius: 16px;
     padding: 1.5rem;
 }
+
+.pointer {
+    cursor: pointer;
+}

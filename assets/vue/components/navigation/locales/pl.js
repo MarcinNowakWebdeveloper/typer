@@ -4,5 +4,6 @@ export default {
     login: 'Zaloguj',
     logout: 'Wyloguj',
     registry: 'Zarejestruj się',
+    stage: 'Aktualny etap',
     users: 'Użytkownicy',
 }
