@@ -34,6 +34,10 @@ const registry = async () => {
             </div>
 
             <div v-if="auth.isLogged" class="navbar-nav ms-4">
+                <router-link class="nav-link d-flex align-items-center px-2" :to="{ name: 'stage' }">
+                    <i class="bi bi-receipt me-2" />{{ t('components.navigation.stage') }}
+                </router-link>
+
                 <router-link class="nav-link d-flex align-items-center px-2" :to="{ name: 'joker' }">
                     <JokerIcon class="joker-icon me-2" />{{ t('components.navigation.joker') }}
                 </router-link>

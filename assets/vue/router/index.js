@@ -4,6 +4,7 @@ import { useAuthStore } from '@/stores/auth'
 import AppLayout from '@/layouts/AppLayout.vue'
 import DashboardPage from '@/modules/dashboard/DashboardPage.vue'
 import JokerPage from '@/modules/user/joker/JokerPage.vue'
+import StagePage from '@/modules/user/stage/StagePage.vue'
 
 import LoginPage from '@/modules/auth/LoginPage.vue'
 import RegisterPage from '@/modules/auth/RegisterPage.vue'
@@ -30,6 +31,14 @@ const routes = [
                 path: '/user/joker',
                 name: 'joker',
                 component: JokerPage,
+                meta: {
+                    requiresAuth: true,
+                },
+            },
+            {
+                path: '/stage/:id?',
+                name: 'stage',
+                component: StagePage,
                 meta: {
                     requiresAuth: true,
                 },

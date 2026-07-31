@@ -28,3 +28,5 @@ api:
 access:
     joker:
         notEditable: 'Typowanie jokera zostało zakończone.'
+    userGame:
+        notEditable: 'Typowanie tego meczu zostało zakończone.'

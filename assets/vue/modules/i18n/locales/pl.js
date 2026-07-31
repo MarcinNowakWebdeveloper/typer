@@ -13,6 +13,7 @@ export default {
         previous: 'Poprzednie',
     },
     title: 'Typer mistrzostw świata 2026',
-    saving: 'Zapisywanie...',
     noData: 'Już wkrótce wystartujemy.',
+    saved: 'Zapisano',
+    saving: 'Zapisywanie...',
 }

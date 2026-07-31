@@ -3,7 +3,10 @@
 namespace App\Entity;
 
 use App\Entity\Stage\Group;
+use App\Entity\User\UserGame;
 use App\Repository\GameRepository;
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Serializer\Attribute\Context;
 use Symfony\Component\Serializer\Attribute\Groups;
@@ -64,6 +67,17 @@ class Game
     #[ORM\Column(nullable: true)]
     private ?int $awayGoals = null;
 
+    /**
+     * @var Collection<int, UserGame>
+     */
+    #[ORM\OneToMany(targetEntity: UserGame::class, mappedBy: 'game')]
+    private Collection $usersGames;
+
+    public function __construct()
+    {
+        $this->usersGames = new ArrayCollection();
+    }
+
     public function getId(): ?int
     {
         return $this->id;
@@ -84,6 +98,11 @@ class Game
     public function setStageGroup(?Group $stageGroup = null): static
     {
         $this->stageGroup = $stageGroup;
+        if (null === $stageGroup) {
+            foreach ($this->usersGames as $userGame) {
+                $this->removeUsersGame($userGame);
+            }
+        }
 
         return $this;
     }
@@ -144,6 +163,36 @@ class Game
     public function setAwayGoals(?int $awayGoals): static
     {
         $this->awayGoals = $awayGoals;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, UserGame>
+     */
+    public function getUsersGames(): Collection
+    {
+        return $this->usersGames;
+    }
+
+    public function addUsersGame(UserGame $usersGame): static
+    {
+        if (!$this->usersGames->contains($usersGame)) {
+            $this->usersGames->add($usersGame);
+            $usersGame->setGame($this);
+        }
+
+        return $this;
+    }
+
+    public function removeUsersGame(UserGame $usersGame): static
+    {
+        if ($this->usersGames->removeElement($usersGame)) {
+            // set the owning side to null (unless already changed)
+            if ($usersGame->getGame() === $this) {
+                $usersGame->setGame();
+            }
+        }
 
         return $this;
     }

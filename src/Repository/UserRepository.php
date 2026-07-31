@@ -96,4 +96,16 @@ class UserRepository extends ServiceEntityRepository implements PasswordUpgrader
             ]),
         ];
     }
+
+    /**
+     * @return array<User>
+     */
+    public function findActiveIndexedById(): array
+    {
+        return $this->createQueryBuilder('u', 'u.id')
+            ->where('u.isActive = true')
+            ->orderBy('u.id', 'ASC')
+            ->getQuery()
+            ->getResult();
+    }
 }
