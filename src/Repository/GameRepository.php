@@ -46,4 +46,16 @@ class GameRepository extends ServiceEntityRepository
             ->getResult()
         ;
     }
+
+    /**
+     * @return array<Game>
+     */
+    public function findWithGoalsSet(): array
+    {
+        return $this->createQueryBuilder('g')
+            ->where('g.homeGoals IS NOT NULL')
+            ->andWhere('g.awayGoals IS NOT NULL')
+            ->getQuery()
+            ->getResult();
+    }
 }

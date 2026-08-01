@@ -36,12 +36,14 @@ class UserGameRepository extends ServiceEntityRepository
      *
      * @return array<UserGame>
      */
-    public function findByGame(Game $game, ?array $orderBy = []): array
+    public function findByGame(Game $game, ?int $strategyId, ?array $orderBy = []): array
     {
         $query = $this->createQueryBuilder('ug')
             ->join('ug.game', 'g')
             ->join('ug.user', 'u')
-            ->addSelect('u')
+            ->leftJoin('ug.userGamePoints', 'ugp')
+            ->leftJoin('ugp.pointCountingStrategy', 'pcs')
+            ->addSelect('u', 'ugp', 'pcs')
             ->where('g.id = :gameId')
             ->setParameter('gameId', $game->getId())
         ;
@@ -50,6 +52,35 @@ class UserGameRepository extends ServiceEntityRepository
             $query->addOrderBy($field, $order);
         }
 
+        if ($strategyId) {
+            $query->andWhere('(pcs.id = :strategyId OR pcs.id IS NULL)')
+                ->setParameter('strategyId', $strategyId);
+        } else {
+            $query->andWhere('(pcs.isDefault = true OR pcs.id IS NULL)');
+        }
+
         return $query->getQuery()->getResult();
+    }
+
+    public function getPointsByUserId(int $userId, ?int $strategyId = null): ?int
+    {
+        $query = $this->createQueryBuilder('ug')
+            ->select('SUM(ugp.points) AS points')
+            ->join('ug.user', 'u')
+            ->join('ug.userGamePoints', 'ugp')
+            ->join('ugp.pointCountingStrategy', 'pcs')
+            ->where('u.id = :userId')
+            ->setParameter('userId', $userId);
+
+        if ($strategyId) {
+            $query->andWhere('pcs.id = :strategyId')
+                ->setParameter('strategyId', $strategyId);
+        } else {
+            $query->andWhere('pcs.isDefault = true');
+        }
+
+        return $query
+            ->getQuery()
+            ->getSingleScalarResult();
     }
 }

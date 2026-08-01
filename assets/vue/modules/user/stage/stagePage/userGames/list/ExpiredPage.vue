@@ -1,15 +1,34 @@
 <script setup>
 import UserAvatar from '@/components/users/UserAvatar.vue'
 import { useAuthStore } from '@/stores/auth'
+import { useI18n } from 'vue-i18n'
 
 const props = defineProps({
     predictions: {
         type: Object,
         required: true,
     },
+    maxPoints: {
+        type: Number,
+        required: true,
+    },
+    pointsSet: {
+        type: Boolean,
+        required: true,
+    },
 })
 
+const { t } = useI18n()
 const auth = useAuthStore()
+
+function getPointsColor(index) {
+    const ratio = index / (props.maxPoints - 1)
+
+    const red = Math.round(255 * (1 - ratio))
+    const green = Math.round(255 * ratio)
+
+    return `rgba(${red}, ${green}, 0, 0.25)`
+}
 </script>
 <template>
     <div class="predictions py-3 px-4">
@@ -19,6 +38,14 @@ const auth = useAuthStore()
                     class="d-flex align-items-center justify-content-center rounded bg-secondary-subtle px-2 py-1 text-nowrap fw-bold"
                 >
                     {{ prediction.prediction }}
+                </div>
+                <div
+                    v-if="pointsSet"
+                    class="d-flex align-items-center justify-content-center rounded px-2 py-1 text-nowrap fw-bold points"
+                    :style="{ backgroundColor: getPointsColor(prediction.points - 1) }"
+                    :title="t('user.stage.game.points')"
+                >
+                    +{{ prediction.points }}
                 </div>
             </div>
             <div class="d-flex flex-wrap gap-2 align-items-center">

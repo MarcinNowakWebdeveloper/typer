@@ -60,7 +60,12 @@ const registry = async () => {
             </div>
 
             <div v-if="auth.isLogged" class="ms-auto d-flex align-items-center gap-3">
-                <UserAvatar :name="auth.user?.name" :color="auth.user?.color" />
+                <div>
+                    <UserAvatar :name="auth.user?.name" :color="auth.user?.color" />
+                    <div class="points text-secondary f08">
+                        {{ auth.user?.points }} {{ t('components.navigation.pts') }}.
+                    </div>
+                </div>
 
                 <button class="btn btn-outline-secondary" @click="logout">
                     <i class="bi bi-box-arrow-right pe-1" />{{ t('components.navigation.logout') }}

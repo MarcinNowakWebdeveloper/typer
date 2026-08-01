@@ -5,6 +5,7 @@ namespace App\Controller\Api\Admin\Config;
 use App\Controller\AbstractBaseController;
 use App\Entity\Stage;
 use App\Exception\InvalidDataException;
+use App\Exception\PointsAlreadyAwardedException;
 use App\Repository\StageRepository;
 use App\Service\StageManager;
 use Doctrine\ORM\EntityManagerInterface;
@@ -89,10 +90,18 @@ class StageController extends AbstractBaseController
     #[Route(':{stage}/remove', name: 'app_config_stage_remove', methods: ['DELETE'])]
     public function remove(Stage $stage): Response
     {
-        foreach ($stage->getGroups()->toArray() as $group) {
-            $stage->removeGroup($group);
-        }
+        try {
+            foreach ($stage->getGroups()->toArray() as $group) {
+                $stage->removeGroup($group);
+            }
+        } catch (PointsAlreadyAwardedException $e) {
+            $message = $this->translator->trans($e->getMessage(), [], 'validators');
 
+            return $this->json(
+                data: ['message' => $message],
+                status: $e->getStatusCode(),
+            );
+        }
         $this->em->remove($stage);
         $this->em->flush();
 

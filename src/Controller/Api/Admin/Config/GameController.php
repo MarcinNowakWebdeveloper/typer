@@ -5,8 +5,10 @@ namespace App\Controller\Api\Admin\Config;
 use App\Controller\AbstractBaseController;
 use App\Entity\Game;
 use App\Exception\InvalidDataException;
+use App\Exception\PointsAlreadyAwardedException;
 use App\Repository\GameRepository;
 use App\Service\GameManager;
+use App\Service\PointsCalculator;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
@@ -64,11 +66,16 @@ class GameController extends AbstractBaseController
     public function edit(
         Request $request,
         Game $game,
+        PointsCalculator $pointsCalculator,
     ): JsonResponse {
         try {
             $data = $this->getEditData($request);
             $this->gameManager->updateFromArray($game, $data);
             $this->validate($game);
+
+            if (!is_null($data['homeGoals']) && !is_null($data['awayGoals'])) {
+                $pointsCalculator->calculate($game);
+            }
 
             $this->em->flush();
         } catch (InvalidDataException $e) {
@@ -87,6 +94,21 @@ class GameController extends AbstractBaseController
     #[Route(':{game}/remove', name: 'app_config_game_remove', methods: ['DELETE'])]
     public function remove(Game $game, EntityManagerInterface $em): Response
     {
+        $usersGames = $game->getUsersGames();
+
+        try {
+            foreach ($usersGames as $userGame) {
+                $game->removeUsersGame($userGame);
+            }
+        } catch (PointsAlreadyAwardedException $e) {
+            $message = $this->translator->trans($e->getMessage(), [], 'validators');
+
+            return $this->json(
+                data: ['message' => $message],
+                status: $e->getStatusCode(),
+            );
+        }
+
         $em->remove($game);
         $em->flush();
 

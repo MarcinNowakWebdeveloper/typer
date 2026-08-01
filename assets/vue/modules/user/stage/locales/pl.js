@@ -20,5 +20,6 @@ export default {
     game: {
         betResult: 'Twój obstawiony wynik',
         bets: 'typy',
+        points: 'Punkty',
     },
 }

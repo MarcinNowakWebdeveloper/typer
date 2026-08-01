@@ -3,6 +3,7 @@
 namespace App\Service\User;
 
 use App\Entity\Game;
+use App\Repository\PointCountingStrategyRepository;
 use App\Repository\User\UserGameRepository;
 use App\Repository\UserRepository;
 
@@ -11,6 +12,7 @@ class PredictionsService
     public function __construct(
         private UserGameRepository $userGameRepository,
         private UserRepository $userRepository,
+        private PointCountingStrategyRepository $pointCountingStrategyRepository,
     ) {
     }
 
@@ -19,7 +21,7 @@ class PredictionsService
      */
     public function getResponseForNotExpired(Game $game): array
     {
-        $userGames = $this->userGameRepository->findByGame($game, ['u.name' => 'ASC']);
+        $userGames = $this->userGameRepository->findByGame($game, null, ['u.name' => 'ASC']);
 
         $userGamesArray = [];
         $users = $this->userRepository->findActiveIndexedById();
@@ -58,15 +60,22 @@ class PredictionsService
      *     }>
      * }
      */
-    public function getResponseForExpired(Game $game): array
+    public function getResponseForExpired(Game $game, ?int $strategyId = null): array
     {
-        $userGames = $this->userGameRepository->findByGame($game, ['ug.homeGoals' => 'DESC', 'ug.awayGoals' => 'DESC']);
+        $userGames = $this->userGameRepository->findByGame(
+            $game,
+            $strategyId,
+            ['ug.homeGoals' => 'DESC', 'ug.awayGoals' => 'DESC']
+        );
 
         $userGamesArray = [];
         foreach ($userGames as $userGame) {
             $code = $userGame->getHomeGoals().'-'.$userGame->getAwayGoals();
             if (!isset($userGamesArray[$code])) {
-                $userGamesArray[$code] = ['prediction' => $code];
+                $userGamesArray[$code] = [
+                    'prediction' => $code,
+                    'points' => $userGame->getPoints(),
+                ];
             }
             $user = $userGame->getUser();
 
@@ -82,7 +91,9 @@ class PredictionsService
 
         return [
             'expired' => true,
+            'points_set' => !is_null($game->getHomeGoals()) && !is_null($game->getAwayGoals()),
             'data' => array_values($userGamesArray),
+            'max_points' => $this->pointCountingStrategyRepository->getMaxPointByStrategyId($strategyId),
         ];
     }
 }
