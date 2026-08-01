@@ -3,6 +3,7 @@
 namespace App\Controller\Api;
 
 use App\Entity\User;
+use App\Repository\User\UserGameRepository;
 use App\Security\EmailVerifier;
 use Doctrine\ORM\EntityManagerInterface;
 use Psr\Log\LoggerInterface;
@@ -28,8 +29,9 @@ class AuthController extends AbstractController
     }
 
     #[Route('/me', name: 'api_me', methods: ['GET'])]
-    public function me(): JsonResponse
-    {
+    public function me(
+        UserGameRepository $userGameRepository,
+    ): JsonResponse {
         /** @var ?User $user */
         $user = $this->getUser();
 
@@ -48,6 +50,7 @@ class AuthController extends AbstractController
                 'roles' => $user->getRoles(),
                 'isAdmin' => $user->isAdmin(),
                 'color' => $user->getColor(),
+                'points' => $userGameRepository->getPointsByUserId($user->getId()),
             ],
         ]);
     }

@@ -5,3 +5,5 @@ user:
 game:
     userGames:
         with_points: 'Nie można usunąć meczu, bo przyznano już punktu.'
+    user_games:
+        with_points: 'Nie można usunąć meczu, bo już są przyznane punkty.'

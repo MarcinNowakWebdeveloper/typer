@@ -16,7 +16,9 @@ const props = defineProps({
 const { t } = useI18n()
 const predictions = ref({})
 const predictionsOpened = ref(false)
+const pointsSet = ref(null)
 const expired = ref(null)
+const maxPoints = ref(null)
 const loading = ref(true)
 
 const loadStage = async () => {
@@ -30,7 +32,9 @@ const loadStage = async () => {
         }
 
         expired.value = response.data.expired
+        pointsSet.value = response.data.points_set
         predictions.value = response.data.data
+        maxPoints.value = response.data.max_points
     } catch (e) {
         alert(e.response?.data?.message ?? t('common.errors.500'))
     } finally {
@@ -60,7 +64,12 @@ onMounted(loadStage)
         </div>
         <Transition name="collapse" class="content">
             <AdminPage v-if="predictionsOpened && !expired" :predictions="predictions" />
-            <ExpiredPage v-else-if="predictionsOpened && expired" :predictions="predictions"></ExpiredPage>
+            <ExpiredPage
+                v-else-if="predictionsOpened && expired"
+                :predictions="predictions"
+                :points-set="pointsSet"
+                :max-points="maxPoints"
+            ></ExpiredPage>
         </Transition>
     </div>
 </template>

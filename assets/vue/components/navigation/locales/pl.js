@@ -6,4 +6,5 @@ export default {
     registry: 'Zarejestruj się',
     stage: 'Aktualny etap',
     users: 'Użytkownicy',
+    pts: 'pkt',
 }

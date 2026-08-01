@@ -8,6 +8,7 @@ use App\Entity\Game;
 use App\Service\User\PredictionsService;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\JsonResponse;
+use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Attribute\Route;
 
 class GameController extends AbstractController
@@ -15,6 +16,7 @@ class GameController extends AbstractController
     #[Route('/api/game:{game}/predictions', name: 'app_game_predictions', methods: ['GET'])]
     public function index(
         Game $game,
+        Request $request,
         PredictionsService $predictionsService,
     ): JsonResponse {
         $now = new \DateTime();
@@ -27,6 +29,10 @@ class GameController extends AbstractController
             return $this->json($predictionsService->getResponseForNotExpired($game));
         }
 
-        return $this->json($predictionsService->getResponseForExpired($game));
+        $pointCountingStrategyId = $request->query->get('pointCountingStrategies');
+        $pointCountingStrategyId = $pointCountingStrategyId ? (int) $pointCountingStrategyId : null;
+        $response = $predictionsService->getResponseForExpired($game, $pointCountingStrategyId);
+
+        return $this->json($response);
     }
 }
