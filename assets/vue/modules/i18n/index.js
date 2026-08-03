@@ -8,6 +8,7 @@ import authPl from '@/modules/auth/locales/pl.js'
 import userJokerPl from '@/modules/user/joker/locales/pl.js'
 import userStagePL from '@/modules/user/stage/locales/pl.js'
 import dashboardPl from '@/modules/dashboard/locales/pl.js'
+import chartsPl from '@/modules/charts/locales/pl.js'
 
 const i18n = createI18n({
     legacy: false,
@@ -20,6 +21,7 @@ const i18n = createI18n({
                 config: adminConfigPl,
             },
             auth: authPl,
+            charts: chartsPl,
             common: commonPl,
             components: {
                 navigation: componentsNavigationPl,

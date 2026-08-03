@@ -1,4 +1,8 @@
 export default {
+    navigation: {
+        ranking: 'Ranking',
+        pointsLineChart: 'Wykres Liniowy',
+    },
     ranking: {
         podium: {
             title: 'Podium',
