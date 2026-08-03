@@ -31,6 +31,7 @@ class Game
     #[Groups([
         'admin:game:list',
         'admin:stage:group:view',
+        'ranking:list',
     ])]
     #[ORM\ManyToOne]
     #[ORM\JoinColumn(nullable: false)]
@@ -39,6 +40,7 @@ class Game
     #[Groups([
         'admin:game:list',
         'admin:stage:group:view',
+        'ranking:list',
     ])]
     #[ORM\ManyToOne]
     #[ORM\JoinColumn(nullable: false)]
@@ -47,6 +49,7 @@ class Game
     #[Groups([
         'admin:game:list',
         'admin:stage:group:view',
+        'ranking:list',
     ])]
     #[Context([DateTimeNormalizer::FORMAT_KEY => 'Y-m-d'])]
     #[ORM\Column]
@@ -56,6 +59,7 @@ class Game
     #[Groups([
         'admin:game:list',
         'admin:stage:group:view',
+        'ranking:list',
     ])]
     #[ORM\Column(nullable: true)]
     private ?int $homeGoals = null;
@@ -63,6 +67,7 @@ class Game
     #[Groups([
         'admin:game:list',
         'admin:stage:group:view',
+        'ranking:list',
     ])]
     #[ORM\Column(nullable: true)]
     private ?int $awayGoals = null;

@@ -83,4 +83,44 @@ class UserGameRepository extends ServiceEntityRepository
             ->getQuery()
             ->getSingleScalarResult();
     }
+
+    /**
+     * @param array<string, string> $orderBy
+     *
+     * @return array<UserGame>
+     */
+    public function findWithPoints(int $strategyId, array $orderBy = []): array
+    {
+        $queryBuilder = $this->createQueryBuilder('ug');
+        $expr = $queryBuilder->expr();
+        $queryBuilder
+            ->addSelect('u, j, t, l, g, sg, s, ugp')
+            ->join('ug.user', 'u')
+            ->join('ug.game', 'g')
+            ->join('g.stageGroup', 'sg')
+            ->join('sg.stage', 's')
+            ->leftJoin('u.joker', 'j')
+            ->leftJoin('j.team', 't')
+            ->leftJoin('t.logo', 'l')
+            ->leftJoin(
+                'ug.userGamePoints',
+                'ugp',
+                'WITH',
+                'ugp.pointCountingStrategy = :strategyId'
+            )
+            ->where($expr->andX(
+                $expr->isNotNull('g.homeGoals'),
+                $expr->isNotNull('g.awayGoals'),
+            ))
+            ->orderBy('g.date', 'DESC')
+            ->setParameter('strategyId', $strategyId);
+
+        if ($orderBy) {
+            foreach ($orderBy as $field => $order) {
+                $queryBuilder->addOrderBy($field, $order);
+            }
+        }
+
+        return $queryBuilder->getQuery()->getResult();
+    }
 }

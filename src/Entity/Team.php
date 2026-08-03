@@ -26,6 +26,7 @@ class Team
         'admin:game:list',
         'admin:group:list',
         'admin:stage:group:view',
+        'ranking:list',
         'team:list',
     ])]
     #[Assert\NotBlank]
@@ -36,6 +37,7 @@ class Team
         'admin:game:list',
         'admin:group:list',
         'admin:stage:group:view',
+        'ranking:list',
         'team:list',
     ])]
     #[ORM\OneToOne(cascade: ['persist', 'remove'])]
