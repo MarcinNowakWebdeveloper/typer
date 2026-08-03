@@ -13,9 +13,11 @@
         "axios": "^1.16.1",
         "bootstrap": "^5.3.8",
         "bootstrap-icons": "^1.13.1",
+        "echarts": "^6.1.0",
         "pinia": "^3.0.4",
         "vue": "^3.5.35",
         "vue-i18n": "^11.4.7",
+        "vue-echarts": "^8.0.1",
         "vue-router": "^5.1.0"
     },
     "devDependencies": {
