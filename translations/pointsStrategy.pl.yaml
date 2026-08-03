@@ -12,3 +12,19 @@ type:
         one_goal_difference:
             label: '+/- 1 gol'
             color: '#2ecc71'
+    relative_scoring_strategy:
+        score:
+            label: 'Trafiony wynik'
+            color: '#f1c40f'
+        winer:
+            label:  'Trafiony zwycięzca'
+            color: '#e74c3c'
+        goals_count:
+            label:  'Najbliżej sumy bramek'
+            color: '#3498db'
+        goals_difference:
+            label:  'Najbliżej różnicy bramek'
+            color: '#db34c9'
+        one_goal_difference:
+            label: '+/- 1 gol'
+            color: '#2ecc71'
