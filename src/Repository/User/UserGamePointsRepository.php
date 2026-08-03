@@ -15,4 +15,26 @@ class UserGamePointsRepository extends ServiceEntityRepository
     {
         parent::__construct($registry, UserGamePoints::class);
     }
+
+    /**
+     * @return array<int, array{type: string, count: int, id: int, name: string, color: string}>
+     */
+    public function countByTypeAndUserId(?int $strategyId = null): array
+    {
+        $qb = $this->createQueryBuilder('ugp');
+        $qb->select('ugp.type, COUNT(ugp.id) as count, u.id, u.name, u.color')
+            ->join('ugp.userGame', 'ug')
+            ->join('ug.user', 'u')
+            ->join('ugp.pointCountingStrategy', 'pcs')
+            ->groupBy('u.id, u.name, u.color, ugp.type');
+
+        if ($strategyId) {
+            $qb->andWhere('pcs.id = :strategyId')
+                ->setParameter('strategyId', $strategyId);
+        } else {
+            $qb->andWhere('pcs.isDefault = true');
+        }
+
+        return $qb->getQuery()->getResult();
+    }
 }

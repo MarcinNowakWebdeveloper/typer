@@ -9,4 +9,11 @@ export default {
             startPoint: 'Start',
         },
     },
+    pointsTypesBar: {
+        options: {
+            tooltip: {
+                sum: 'Razem',
+            },
+        },
+    },
 }
