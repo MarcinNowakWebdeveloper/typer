@@ -1,13 +1,7 @@
 <script setup>
-import { useAuthStore } from '@/stores/auth.js'
-
-const auth = useAuthStore()
+import RankingPage from '@/modules/dashboard/RankingPage.vue'
 </script>
 
 <template>
-    <div>
-        <h1>Dashboard</h1>
-
-        <p>Witaj {{ auth.user.name }}</p>
-    </div>
+    <RankingPage />
 </template>

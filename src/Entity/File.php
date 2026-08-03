@@ -16,6 +16,7 @@ class File
         'admin:game:list',
         'admin:group:list',
         'admin:stage:group:view',
+        'ranking:list',
         'team:list',
     ])]
     #[ORM\Id]

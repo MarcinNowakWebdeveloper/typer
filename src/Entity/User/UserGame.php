@@ -20,13 +20,16 @@ class UserGame
     #[ORM\Column]
     private ?int $id = null;
 
+    #[Groups(['ranking:list'])]
     #[ORM\ManyToOne(inversedBy: 'usersGames')]
     #[ORM\JoinColumn(nullable: false, onDelete: 'CASCADE')]
     private ?Game $game = null;
 
+    #[Groups(['ranking:list'])]
     #[ORM\Column(nullable: true)]
     private ?int $homeGoals = null;
 
+    #[Groups(['ranking:list'])]
     #[ORM\Column(nullable: true)]
     private ?int $awayGoals = null;
 
@@ -139,6 +142,7 @@ class UserGame
         return $this;
     }
 
+    #[Groups(['ranking:list'])]
     public function getPoints(): float
     {
         $strategyId = null;

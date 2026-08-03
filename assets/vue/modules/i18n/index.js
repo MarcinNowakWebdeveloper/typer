@@ -7,6 +7,7 @@ import componentsNavigationPl from '@/components/navigation/locales/pl.js'
 import authPl from '@/modules/auth/locales/pl.js'
 import userJokerPl from '@/modules/user/joker/locales/pl.js'
 import userStagePL from '@/modules/user/stage/locales/pl.js'
+import dashboardPl from '@/modules/dashboard/locales/pl.js'
 
 const i18n = createI18n({
     legacy: false,
@@ -27,6 +28,7 @@ const i18n = createI18n({
                 joker: userJokerPl,
                 stage: userStagePL,
             },
+            dashboard: dashboardPl,
         },
     },
 })

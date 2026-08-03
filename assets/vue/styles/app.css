@@ -16,6 +16,10 @@
     --text-primary: #5b4cff;
 
     --radius: 16px;
+
+    --gold: #f6c400;
+    --silver: #cfd3d9;
+    --bronze: #f39a00;
 }
 
 body {
@@ -37,4 +41,8 @@ body {
 
 .pointer {
     cursor: pointer;
+}
+
+.f08 {
+    font-size: 0.8em;
 }

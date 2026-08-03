@@ -30,4 +30,21 @@ class PointCountingStrategyRepository extends ServiceEntityRepository
 
         return $query->getQuery()->getSingleScalarResult();
     }
+
+    public function getByIdOrDefault(?int $id = null): ?PointCountingStrategy
+    {
+        $query = $this->createQueryBuilder('p');
+
+        if (!$id) {
+            $query->where('p.isDefault = true');
+
+            return $query->getQuery()->getOneOrNullResult();
+        }
+
+        return $query
+            ->where('p.id = :id')
+            ->setParameter('id', $id)
+            ->getQuery()
+            ->getOneOrNullResult();
+    }
 }
