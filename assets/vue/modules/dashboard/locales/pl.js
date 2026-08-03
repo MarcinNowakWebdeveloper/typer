@@ -2,6 +2,7 @@ export default {
     navigation: {
         ranking: 'Ranking',
         pointsLineChart: 'Wykres Liniowy',
+        pointsTypesBarChart: 'Wykres trafień',
     },
     ranking: {
         podium: {

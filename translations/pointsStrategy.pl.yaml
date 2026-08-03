@@ -1,0 +1,14 @@
+type:
+    fixed_points_scoring_strategy:
+        score:
+            label: 'Trafiony wynik'
+            color: '#f1c40f'
+        winer:
+            label:  'Trafiony zwycięzca'
+            color: '#e74c3c'
+        goals_count:
+            label:  'Trafiona ilość goli'
+            color: '#3498db'
+        one_goal_difference:
+            label: '+/- 1 gol'
+            color: '#2ecc71'
