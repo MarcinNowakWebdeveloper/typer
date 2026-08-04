@@ -13,6 +13,7 @@ import VerifyFailedPage from '@/modules/auth/VerifyFailedPage.vue'
 
 import UsersPage from '@/modules/admin/users/UsersPage.vue'
 import ConfigPage from '@/modules/admin/config/ConfigPage.vue'
+import ProfilePage from '@/modules/user/profile/ProfilePage.vue'
 
 const routes = [
     {
@@ -39,6 +40,14 @@ const routes = [
                 path: '/stage/:id?',
                 name: 'stage',
                 component: StagePage,
+                meta: {
+                    requiresAuth: true,
+                },
+            },
+            {
+                path: '/profile',
+                name: 'profile',
+                component: ProfilePage,
                 meta: {
                     requiresAuth: true,
                 },

@@ -31,9 +31,13 @@ class AuthController extends AbstractController
     #[Route('/me', name: 'api_me', methods: ['GET'])]
     public function me(
         UserGameRepository $userGameRepository,
+        Request $request,
     ): JsonResponse {
         /** @var ?User $user */
         $user = $this->getUser();
+
+        $pointCountingStrategyId = $request->query->get('pointCountingStrategies');
+        $pointCountingStrategyId = $pointCountingStrategyId ? (int) $pointCountingStrategyId : null;
 
         if (!$user) {
             return $this->json(
@@ -50,7 +54,7 @@ class AuthController extends AbstractController
                 'roles' => $user->getRoles(),
                 'isAdmin' => $user->isAdmin(),
                 'color' => $user->getColor(),
-                'points' => $userGameRepository->getPointsByUserId($user->getId()),
+                'points' => $userGameRepository->getPointsByUserId($user->getId(), $pointCountingStrategyId),
             ],
         ]);
     }

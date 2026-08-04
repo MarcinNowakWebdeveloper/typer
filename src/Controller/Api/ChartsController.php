@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace App\Controller\Api;
 
-use App\Repository\PointCountingStrategyRepository;
+use App\Exception\InvalidDataException;
 use App\Service\Charts\PointsChartLine;
 use App\Service\Charts\PointsTypesBarChart;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -34,6 +34,15 @@ class ChartsController extends AbstractController
         $pointCountingStrategyId = $request->query->get('pointCountingStrategies');
         $pointCountingStrategyId = $pointCountingStrategyId ? (int) $pointCountingStrategyId : null;
 
-        return $this->json($barChart->getData($pointCountingStrategyId));
+        try {
+            $data = $barChart->getData($pointCountingStrategyId);
+        } catch (InvalidDataException $exception) {
+            return $this->json(
+                data: ['message' => $exception->getMessage()],
+                status: $exception->getCode()
+            );
+        }
+
+        return $this->json($data);
     }
 }

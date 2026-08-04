@@ -5,6 +5,7 @@ import AdminPage from '@/modules/user/stage/stagePage/userGames/list/AdminPage.v
 import ExpiredPage from '@/modules/user/stage/stagePage/userGames/list/ExpiredPage.vue'
 import { useI18n } from 'vue-i18n'
 import AppLoader from '@/components/loaders/AppLoader.vue'
+import { useSettingsStore } from '@/stores/settings'
 
 const props = defineProps({
     gameId: {
@@ -23,6 +24,10 @@ const loading = ref(true)
 
 const loadStage = async () => {
     let url = '/api/game:' + props.gameId + '/predictions'
+    let settings = useSettingsStore()
+    if (settings.pointCountingStrategies) {
+        url += '?pointCountingStrategies=' + settings.pointCountingStrategies
+    }
 
     try {
         loading.value = true

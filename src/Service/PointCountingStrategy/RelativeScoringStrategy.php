@@ -3,6 +3,7 @@
 namespace App\Service\PointCountingStrategy;
 
 use App\Entity\User\UserGame;
+use App\Enum\RelativeScoringStrategyTypeEnum;
 use App\Enum\RelativeScoringStrategyTypeEnum as PointsTypeEnum;
 
 class RelativeScoringStrategy extends AbstractStrategy
@@ -170,5 +171,10 @@ class RelativeScoringStrategy extends AbstractStrategy
                 $this->createUpdatePoints($type->value, 4 - $rank, $userGame);
             }
         }
+    }
+
+    public function getPointTypes(): array
+    {
+        return RelativeScoringStrategyTypeEnum::getValues();
     }
 }

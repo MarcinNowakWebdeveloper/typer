@@ -47,4 +47,17 @@ class PointCountingStrategyRepository extends ServiceEntityRepository
             ->getQuery()
             ->getOneOrNullResult();
     }
+
+    /**
+     * @return array<PointCountingStrategy>
+     */
+    public function findAllWithTranslation(string $lang): array
+    {
+        return $this->createQueryBuilder('p')
+            ->leftJoin('p.translations', 't')
+            ->where('t.locale = :locale')
+            ->setParameter('locale', $lang)
+            ->getQuery()
+            ->getResult();
+    }
 }

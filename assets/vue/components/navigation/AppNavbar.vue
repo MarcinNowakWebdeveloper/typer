@@ -61,7 +61,9 @@ const registry = async () => {
 
             <div v-if="auth.isLogged" class="ms-auto d-flex align-items-center gap-3">
                 <div>
-                    <UserAvatar :name="auth.user?.name" :color="auth.user?.color" />
+                    <router-link :to="{ name: 'profile' }">
+                        <UserAvatar :name="auth.user?.name" :color="auth.user?.color" />
+                    </router-link>
                     <div class="points text-secondary f08">
                         {{ auth.user?.points }} {{ t('components.navigation.pts') }}.
                     </div>
