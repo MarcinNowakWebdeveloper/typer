@@ -2,15 +2,25 @@
 
 namespace App\Service\Charts;
 
-use App\Enum\FixedPointsScoringStrategyTypesEnum;
+use App\Exception\InvalidDataException;
+use App\Repository\PointCountingStrategyRepository;
 use App\Repository\User\UserGamePointsRepository;
+use App\Service\PointCountingStrategy\StrategyInterface;
+use Symfony\Component\DependencyInjection\Attribute\AutowireIterator;
+use Symfony\Component\HttpFoundation\Response;
 use Symfony\Contracts\Translation\TranslatorInterface;
 
 readonly class PointsTypesBarChart
 {
+    /**
+     * @param iterable<StrategyInterface> $strategies
+     */
     public function __construct(
+        #[AutowireIterator('app.scoring_strategy')]
+        private iterable $strategies,
         private UserGamePointsRepository $userGamePointsRepository,
         private TranslatorInterface $translator,
+        private PointCountingStrategyRepository $pointCountingStrategyRepository,
     ) {
     }
 
@@ -31,7 +41,7 @@ readonly class PointsTypesBarChart
     public function getData(?int $strategyId): array
     {
         $data = [];
-        $types = FixedPointsScoringStrategyTypesEnum::getValues();
+        $types = $this->getPointTypes($strategyId);
         $usersGamePointsCount = $this->userGamePointsRepository->countByTypeAndUserId($strategyId);
 
         foreach ($usersGamePointsCount as $userGamePoints) {
@@ -73,5 +83,22 @@ readonly class PointsTypesBarChart
         }
 
         return $typesData;
+    }
+
+    /**
+     * @return array<string>
+     *
+     * @throws \Exception
+     */
+    private function getPointTypes(?int $strategyId): array
+    {
+        $strategy = $this->pointCountingStrategyRepository->getByIdOrDefault($strategyId ?? null);
+        foreach ($this->strategies as $scoringStrategy) {
+            if ($scoringStrategy->getCode() === $strategy->getCode()) {
+                return $scoringStrategy->getPointTypes();
+            }
+        }
+
+        throw new InvalidDataException(message: $this->translator->trans('type.not_found', [], 'pointsStrategy'), code: Response::HTTP_NOT_FOUND);
     }
 }

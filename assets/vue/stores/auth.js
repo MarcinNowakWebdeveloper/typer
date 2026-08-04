@@ -1,5 +1,6 @@
 import { defineStore } from 'pinia'
 import api from '@/services/api'
+import { useSettingsStore } from '@/stores/settings.js'
 
 export const useAuthStore = defineStore('auth', {
     state: () => ({
@@ -16,7 +17,12 @@ export const useAuthStore = defineStore('auth', {
     actions: {
         async loadUser() {
             try {
-                const { data } = await api.get('/api/me')
+                let url = '/api/me'
+                let settings = useSettingsStore()
+                if (settings.pointCountingStrategies) {
+                    url += '?pointCountingStrategies=' + settings.pointCountingStrategies
+                }
+                const { data } = await api.get(url)
 
                 this.user = data.user
             } catch {

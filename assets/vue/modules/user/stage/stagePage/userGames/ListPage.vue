@@ -6,6 +6,7 @@ import ExpiredPage from '@/modules/user/stage/stagePage/userGames/list/ExpiredPa
 import { useI18n } from 'vue-i18n'
 import AppLoader from '@/components/loaders/AppLoader.vue'
 import toast from '@/services/toast.js'
+import { useSettingsStore } from '@/stores/settings'
 
 const props = defineProps({
     gameId: {
@@ -24,6 +25,10 @@ const loading = ref(true)
 
 const loadStage = async () => {
     let url = '/api/game:' + props.gameId + '/predictions'
+    let settings = useSettingsStore()
+    if (settings.pointCountingStrategies) {
+        url += '?pointCountingStrategies=' + settings.pointCountingStrategies
+    }
 
     try {
         loading.value = true

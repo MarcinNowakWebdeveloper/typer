@@ -19,7 +19,7 @@ class UserGamePointsRepository extends ServiceEntityRepository
     /**
      * @return array<int, array{type: string, count: int, id: int, name: string, color: string}>
      */
-    public function countByTypeAndUserId(?int $strategyId = null): array
+    public function countByTypeAndUserId(?int $strategyId): array
     {
         $qb = $this->createQueryBuilder('ugp');
         $qb->select('ugp.type, COUNT(ugp.id) as count, u.id, u.name, u.color')

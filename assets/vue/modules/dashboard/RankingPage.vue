@@ -7,6 +7,7 @@ import AppLoader from '@/components/loaders/AppLoader.vue'
 import RankingTable from '@/modules/dashboard/RankingPage/RankingTable.vue'
 import AppNoData from '@/components/no_data/AppNoData.vue'
 import toast from '@/services/toast.js'
+import { useSettingsStore } from '@/stores/settings.js'
 
 const { t } = useI18n()
 const ranking = ref(null)
@@ -15,7 +16,13 @@ const loading = ref(true)
 const loadRanking = async () => {
     try {
         loading.value = true
-        const { data } = await api.get('/api/ranking')
+
+        let url = '/api/ranking'
+        let settings = useSettingsStore()
+        if (settings.pointCountingStrategies) {
+            url += '?pointCountingStrategies=' + settings.pointCountingStrategies
+        }
+        const { data } = await api.get(url)
         ranking.value = data
     } catch (e) {
         toast.error(e.response?.data?.message ?? t('common.errors.500'))

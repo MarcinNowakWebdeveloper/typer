@@ -9,6 +9,7 @@ import userJokerPl from '@/modules/user/joker/locales/pl.js'
 import userStagePL from '@/modules/user/stage/locales/pl.js'
 import dashboardPl from '@/modules/dashboard/locales/pl.js'
 import chartsPl from '@/modules/charts/locales/pl.js'
+import profilePl from '@/modules/user/profile/locales/pl.js'
 
 const i18n = createI18n({
     legacy: false,
@@ -29,6 +30,7 @@ const i18n = createI18n({
             user: {
                 joker: userJokerPl,
                 stage: userStagePL,
+                profile: profilePl,
             },
             dashboard: dashboardPl,
         },

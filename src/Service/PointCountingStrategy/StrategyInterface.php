@@ -12,4 +12,9 @@ interface StrategyInterface
     public function calculate(array $usersGames): void;
 
     public static function getCode(): string;
+
+    /**
+     * @return array<string>
+     */
+    public function getPointTypes(): array;
 }

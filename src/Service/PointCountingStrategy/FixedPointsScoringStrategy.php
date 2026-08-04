@@ -3,6 +3,7 @@
 namespace App\Service\PointCountingStrategy;
 
 use App\Entity\User\UserGame;
+use App\Enum\FixedPointsScoringStrategyTypesEnum;
 use App\Enum\FixedPointsScoringStrategyTypesEnum as PointsTypeEnum;
 
 class FixedPointsScoringStrategy extends AbstractStrategy
@@ -75,5 +76,10 @@ class FixedPointsScoringStrategy extends AbstractStrategy
     public static function getCode(): string
     {
         return self::CODE;
+    }
+
+    public function getPointTypes(): array
+    {
+        return FixedPointsScoringStrategyTypesEnum::getValues();
     }
 }

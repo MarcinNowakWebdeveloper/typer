@@ -28,3 +28,4 @@ type:
         one_goal_difference:
             label: '+/- 1 gol'
             color: '#2ecc71'
+    not_found: 'Nie znaleziono strategii naliczania punktów'
