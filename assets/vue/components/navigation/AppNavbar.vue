@@ -42,6 +42,10 @@ const registry = async () => {
                     <JokerIcon class="joker-icon me-2" />{{ t('components.navigation.joker') }}
                 </router-link>
 
+                <router-link class="nav-link d-flex align-items-center px-2" :to="{ name: 'regulations' }">
+                    <i class="bi bi-file-text me-2" />{{ t('components.navigation.regulations') }}
+                </router-link>
+
                 <router-link
                     v-if="auth.isAdmin"
                     class="nav-link d-flex align-items-center px-2"

@@ -7,4 +7,5 @@ export default {
     stage: 'Aktualny etap',
     users: 'Użytkownicy',
     pts: 'pkt',
+    regulations: 'Regulamin',
 }
